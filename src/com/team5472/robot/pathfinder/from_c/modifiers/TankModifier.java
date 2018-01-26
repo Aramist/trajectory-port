@@ -8,11 +8,11 @@ import static java.lang.Math.sqrt;
 
 public class TankModifier {
 
-    public static void pathfinder_modify_tank(Segment[] original, int length, Segment[] leftTraj, Segment[] rightTraj,
-                                double wheelbaseWidth){
+    private static void modifyTank(Segment[] original, Segment[] leftTraj, Segment[] rightTraj,
+                                   double wheelbaseWidth){
         double w = wheelbaseWidth / 2.0;
 
-        for(int i = 0; i < length; i++){
+        for(int i = 0; i < original.length; i++){
             Segment seg = original[i];
             Segment left = seg.clone();
             Segment right = seg.clone();
@@ -48,5 +48,30 @@ public class TankModifier {
             leftTraj[i] = left;
             rightTraj[i] = right;
         }
+    }
+
+    private Segment[] left, right, source;
+
+    public TankModifier(Segment[] source){
+        this.source = source;
+    }
+
+    public TankModifier modify(double wheelbaseWidth){
+        left = new Segment[source.length];
+        right = new Segment[source.length];
+        modifyTank(source, left, right, wheelbaseWidth);
+        return this;
+    }
+
+    public Segment[] getSource(){
+        return source;
+    }
+
+    public Segment[] getLeft(){
+        return left;
+    }
+
+    public Segment[] getRight(){
+        return right;
     }
 }

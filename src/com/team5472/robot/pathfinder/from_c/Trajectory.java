@@ -2,7 +2,7 @@ package com.team5472.robot.pathfinder.from_c;
 
 public class Trajectory {
 
-    public static void pf_trajectory_copy(Segment[] source, Segment[] dest, int length){
+    protected static void copy(Segment[] source, Segment[] dest, int length){
         for(int i = 0; i < length; i++){
             Segment s = source[0];
             Segment d = new Segment(s.dt, s.x, s.y, s.position, s.velocity, s.acceleration, s.jerk, s.heading);
@@ -11,7 +11,7 @@ public class Trajectory {
         }
     }
 
-    public static TrajectoryInfo pf_trajectory_prepare(TrajectoryConfig c){
+    protected static TrajectoryInfo prepare(TrajectoryConfig c){
         double max_a2 = c.maxA * c.maxA;
         double max_j2 = c.maxJ * c.maxJ;
 
@@ -37,8 +37,8 @@ public class Trajectory {
         return info;
     }
 
-    public static int pf_trajectory_create(TrajectoryInfo info, TrajectoryConfig c, Segment[] seg){
-        int ret = pf_trajectory_fromSecondOrderFilter(info.filter1, info.filter2, info.dt, info.u, info.v, info.impulse,
+    protected static int create(TrajectoryInfo info, TrajectoryConfig c, Segment[] seg){
+        int ret = fromSecondOrderFilter(info.filter1, info.filter2, info.dt, info.u, info.v, info.impulse,
                 info.length, seg);
 
         if(ret < 0)
@@ -51,8 +51,8 @@ public class Trajectory {
         return 0;
     }
 
-    public static int pf_trajectory_fromSecondOrderFilter(int filter_1_l, int filter_2_l, double dt, double u, double v,
-                                                          double impulse, int len, Segment[] t){
+    protected static int fromSecondOrderFilter(int filter_1_l, int filter_2_l, double dt, double u, double v,
+                                            double impulse, int len, Segment[] t){
         Segment last_section = new Segment(dt, 0, 0, u, 0, 0, 0, 0);
 
         if(len < 0)
