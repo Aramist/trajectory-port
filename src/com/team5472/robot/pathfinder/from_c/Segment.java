@@ -11,6 +11,8 @@ public class Segment {
     public double jerk;
     public double heading;
 
+    public Segment(){}
+
     public Segment(double dt, double x, double y, double position, double velocity, double acceleration, double jerk,
                    double heading){
         this.dt = dt;
