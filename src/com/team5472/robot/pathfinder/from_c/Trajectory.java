@@ -1,6 +1,24 @@
 package com.team5472.robot.pathfinder.from_c;
 
+import com.team5472.robot.pathfinder.from_c.fit.FitMethod;
+
 public class Trajectory {
+
+    public static class Config{
+        public FitMethod fit;
+        public int samples;
+        public double dt, max_velocity, max_acceleration, max_jerk;
+
+        public Config(FitMethod fit, int samples, double dt, double max_v, double max_a, double max_j){
+            this.fit = fit;
+            this.samples = samples;
+            this.dt = dt;
+            this.max_velocity = max_v;
+            this.max_acceleration = max_a;
+            this.max_jerk = max_j;
+        }
+    }
+
 
     protected static void copy(Segment[] source, Segment[] dest, int length){
         for(int i = 0; i < length; i++){

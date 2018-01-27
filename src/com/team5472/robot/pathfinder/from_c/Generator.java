@@ -4,9 +4,11 @@ import com.team5472.robot.pathfinder.from_c.fit.FitMethod;
 
 public class Generator {
 
-    protected static int prepare(final Waypoint[] path, int path_length, FitMethod fit, int sample_count,
+    protected static int prepare(final Waypoint[] path, FitMethod fit, int sample_count,
                               double dt, double max_velocity, double max_accel, double max_jerk,
                               TrajectoryCandidate cand){
+
+        int path_length = path.length;
         if(path_length < 2)
             return -1;
 
